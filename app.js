@@ -4,6 +4,14 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
     // Inicializar variables
 var app = express();
+// COOOOORS
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Contro-Allow-Methods", "POST", "PUT", "DELETE", "OPTIONS");
+    next();
+});
 
 //=====Body parser
 // parse application/x-www-form-urlencoded
