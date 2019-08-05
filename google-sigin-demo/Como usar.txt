@@ -1,0 +1,6 @@
+#### para ejecutar
+npm run dev
+
+recuerda que se instalo esto
+
+ npm install lite-server --save-dev
