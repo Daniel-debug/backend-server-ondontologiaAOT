@@ -64,7 +64,7 @@ app.get('/todo/:busqueda', (req, res, next) => {
                 ok: true,
                 hospitales: respuestas[0],
                 medicos: respuestas[1],
-                usuario: respuestas[2]
+                usuarios: respuestas[2]
 
             });
         })
@@ -73,7 +73,7 @@ app.get('/todo/:busqueda', (req, res, next) => {
 
 function buscarHospitales(busqueda, regex) {
     return new Promise((resolve, reject) => {
-        Hospital.find({ nombre: regex }).populate('usuario', 'nombre email').exec((err, hospitales) => {
+        Hospital.find({ nombre: regex }).populate('usuario', 'nombre email img').exec((err, hospitales) => {
             if (err) {
                 reject('Error al cargar hospitales', err);
             } else {
@@ -87,7 +87,7 @@ function buscarHospitales(busqueda, regex) {
 function buscarMedicos(busqueda, regex) {
     return new Promise((resolve, reject) => {
         Medico.find({ nombre: regex })
-            .populate('usuario', 'nombre email')
+            .populate('usuario', 'nombre email img')
             .populate('hospital')
             .exec((err, medicos) => {
                 if (err) {
@@ -102,7 +102,7 @@ function buscarMedicos(busqueda, regex) {
 
 function buscarUsuarios(busqueda, regex) {
     return new Promise((resolve, reject) => {
-        Usuario.find({}, 'nombre email role').or([{ nombre: regex }, { 'email': regex }]) // or resive un arreglo de condiciones 2 propiedades donde quiere buscar
+        Usuario.find({}, 'nombre email role img').or([{ nombre: regex }, { 'email': regex }]) // or resive un arreglo de condiciones 2 propiedades donde quiere buscar
             .exec((err, usuario) => {
                 if (err) {
                     reject('Erro al cargar usuarios', err);
